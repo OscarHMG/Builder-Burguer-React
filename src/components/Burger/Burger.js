@@ -16,7 +16,6 @@ const burger = props => {
       return array.concat(element);
     }, []);
 
-  console.log(burgerIngedients);
   return (
     <div className={style.Burger}>
       <BurgerIngredient type="bread-top" />
