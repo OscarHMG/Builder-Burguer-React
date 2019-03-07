@@ -9,7 +9,7 @@ const controls = [
   { label: "Meat", type: "meat" }
 ];
 const buildControls = props => {
-  console.log(controls);
+  
   return (
     <div className={style.BuildControls}>
       <p>
