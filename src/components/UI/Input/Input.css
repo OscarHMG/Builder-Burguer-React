@@ -27,3 +27,13 @@
     outline: gone;
     background-color: #eee;
 }
+
+.Invalid{
+    border: 1px solid red;
+    background-color:  #FDA494;
+}
+
+.ErrorMessage {
+    color: red;
+    margin: 5px 0;
+}
