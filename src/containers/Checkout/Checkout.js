@@ -5,7 +5,9 @@ import CheckoutSummary from "./../../components/Order/CheckoutSummary/CheckoutSu
 import ContactData from "./ContactData/ContactData";
 import { connect } from "react-redux";
 
+
 class Checkout extends Component {
+
   checkOutCancelHandler = () => {
     this.props.history.goBack();
   };
@@ -16,10 +18,14 @@ class Checkout extends Component {
 
   render() {
     let summary = <Redirect to="/" />;
+    
 
     if (this.props.ings) {
+
+      let purchasedRedirect = this.props.purchased ? <Redirect to="/" /> : null;
       summary = (
         <div>
+          {purchasedRedirect}
           <CheckoutSummary
             ingredients={this.props.ings}
             onCheckoutCancelled={this.checkOutCancelHandler}
@@ -39,9 +45,10 @@ class Checkout extends Component {
 
 const mapStateToProps = state => {
   return {
-    ings: state.burguerBuilder.ingredients
-    //price: state.totalPrice
+    ings: state.burguerBuilder.ingredients,
+    purchased: state.order.purchased 
   };
 };
+
 
 export default connect(mapStateToProps)(Checkout);

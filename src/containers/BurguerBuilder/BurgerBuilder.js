@@ -9,7 +9,7 @@ import Spinner from "./../../components/UI/Spinner/Spinner";
 import errorHandler from "./../../hoc/ErrorHandler/ErrorHandler";
 
 import { connect } from "react-redux";
-import * as burguerBuilderActions from "../../store/actions/index";
+import * as actions from "../../store/actions/index";
 
 import axios from "./../../axios-orders";
 
@@ -60,6 +60,7 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
+    this.props.onInitPurchased();
     this.props.history.push("/checkout");
   };
 
@@ -123,10 +124,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onIngredientAdded: ingName =>
-      dispatch(burguerBuilderActions.addIngredient(ingName)),
+      dispatch(actions.addIngredient(ingName)),
     onIngredientRemoved: ingName =>
-      dispatch(burguerBuilderActions.removeIngredient(ingName)),
-    onInitIngredients: () => dispatch(burguerBuilderActions.initIngredients())
+      dispatch(actions.removeIngredient(ingName)),
+    onInitIngredients: () => dispatch(actions.initIngredients()),
+    onInitPurchased : () => dispatch(actions.purchaseInit())
   };
 };
 

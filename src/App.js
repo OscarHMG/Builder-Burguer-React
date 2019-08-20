@@ -3,7 +3,10 @@ import Layout from './components/Layout/Layout';
 import BurgerBuilder from "./containers/BurguerBuilder/BurgerBuilder";
 import Checkout from "./containers/Checkout/Checkout";
 import { Route, Switch} from "react-router-dom";
-import { Orders } from './containers/Orders/Orders';
+//import { Orders } from './containers/Orders/Orders';
+
+//NOTE: Debido al import default de la clase, el import debe hacerse sin los curlybraces.
+import Orders from './containers/Orders/Orders';
 
 class App extends Component {
   render() {
