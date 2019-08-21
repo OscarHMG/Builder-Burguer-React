@@ -16,3 +16,8 @@ export {
     fetchOrders
 }
 from './order';
+
+
+export {
+    authSubmit
+} from './auth'

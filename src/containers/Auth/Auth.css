@@ -1,0 +1,57 @@
+/* body {
+    display: table;
+    width: 100%;
+ }
+
+form{
+    margin: auto;
+    align-content: center;
+    padding: 25px 10px 25px 15px;
+    text-align: center;
+    border: 2px solid;
+    border-color: #ccc;
+    box-shadow: 10px 10px 5px 0px rgba(130,121,130,1);
+    border-radius: 25px;
+    width: 350px
+}
+ */
+
+ .Auth {
+    margin: 20px auto;
+    width: 30%;
+    text-align: center;
+    box-shadow: 0 2px 3px #ccc;
+    border: 1px solid #eee;
+    padding: 25px 10px 25px 15px;
+
+}
+
+.Input {
+    display: block;
+}
+
+@media(min-width: 600px) {
+    .ContactData {
+        width: 500px;
+    }
+
+}
+
+.Inline{
+    display: inline-block;
+    text-align: center
+}
+
+.Pointer {
+    cursor: pointer;
+    font-size: 11px;
+    color: #703B09;
+    font-weight: bold;
+}
+
+.Error {
+    color: red;
+    margin-top: 5px;
+    font-size: 9px;
+    font-weight: bolder
+}
