@@ -19,5 +19,7 @@ from './order';
 
 
 export {
-    authSubmit
+    authSubmit, logOut,
+    redirectPath,
+    authCheckState
 } from './auth'

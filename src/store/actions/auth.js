@@ -22,6 +22,28 @@ export const authStart = () =>{
     }
 }
 
+
+export const checkAuthTimeOut = (expTime) =>{
+    return dispatch =>{
+        setTimeout( ()=>{
+            dispatch(logOut())
+        }, expTime * 1000);
+    }
+}
+
+
+export const logOut = () =>{
+    //Remove token info from localStorage
+    localStorage.removeItem('token');
+    localStorage.removeItem('expirationDate')
+    localStorage.removeItem('userId');
+
+    return {
+        type: actionTypes.LOG_OUT
+    }
+}
+
+
 export const authSubmit = (userInfo) =>{
     return dispatch => {
         //Async 
@@ -39,11 +61,42 @@ export const authSubmit = (userInfo) =>{
         
 
         axios.post(url,payload).then( response => {
-            console.log(response.data);
             dispatch(authSuccess(response.data));
+            //Persistent in the browser
+            const expirationDate = new Date(new Date().getTime() + (response.data.expiresIn * 1000)); 
+            localStorage.setItem('token', response.data.idToken);
+            localStorage.setItem('expirationDate',expirationDate);
+            localStorage.setItem('userId', response.data.localId);
+            dispatch(checkAuthTimeOut(response.data.expiresIn))
         })
         .catch(err =>{
             dispatch(authFail(err.response.data.error));
         }) ;
     }
 }
+
+export const redirectPath = (url) =>{
+    return{
+        type: actionTypes.REDIRECT_PATH,
+        url
+    }
+}
+
+export const authCheckState = () =>{
+    return dispatch =>{
+        const token = localStorage.getItem('token');
+        if(!token){
+            dispatch(logOut());
+        }else{
+            const expTime = new Date(localStorage.getItem('expirationDate'));
+            if(expTime <= new Date()){
+                dispatch(logOut());
+            }else{
+                const userId = localStorage.getItem('userId');
+                dispatch(authSuccess({userId, token}));
+                dispatch(checkAuthTimeOut( (expTime.getTime() - new Date().getTime()) / 1000 ));
+            }
+        }
+    }
+}
+

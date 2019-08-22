@@ -4,7 +4,8 @@ const initState = {
     token : null,
     userId : null,
     error: null,
-    loading: false
+    loading: false, 
+    redirectURL : '/'
 }
 const reducer = (state = initState, action) =>{
     switch (action.type) {
@@ -16,7 +17,6 @@ const reducer = (state = initState, action) =>{
             };
 
         case actionTypes.AUTH_SUCCES:
-            console.log('action', action);
             return{
                 ...state,
                 token: action.userInfo.idToken,
@@ -31,6 +31,20 @@ const reducer = (state = initState, action) =>{
                 ...state,
                 loading: false,
                 error: action.error
+            }
+
+        case actionTypes.LOG_OUT:
+            return{
+                ...state,
+                token : null,
+                userId: null
+
+            }
+
+        case actionTypes.REDIRECT_PATH:
+            return{
+                ...state,
+                redirectURL : action.url
             }
     
         default:

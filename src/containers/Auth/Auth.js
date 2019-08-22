@@ -4,6 +4,7 @@ import Button from "../../components/UI/Button/Button";
 import classes from "./Auth.css";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+import { Redirect} from 'react-router-dom'
 
 import Spinner from "../../components/UI/Spinner/Spinner";
 
@@ -43,6 +44,13 @@ class Auth extends Component {
     },
     isSignUp: true
   };
+
+
+  componentDidMount(){
+    if(!this.props.burguerIsBuilding && this.props.redirectURL !== '/'){
+      this.onRedirectAuthURL('/');
+    }
+  }
 
   checkValidations = (value, rules) => {
     let isValid = true;
@@ -100,6 +108,8 @@ class Auth extends Component {
     let form = <Spinner />;
     let error = null;
 
+    let isAuthRedirect = null;
+
     if (!this.props.loading) {
       form = (
         <form onSubmit={this.submithAuth}>
@@ -132,11 +142,17 @@ class Auth extends Component {
     }
 
 
+    if(this.props.isAuthenticated){
+      isAuthRedirect = <Redirect to={this.props.redirectURL}/>;
+    }
+
     return (
       <div className={classes.Auth}>
         <h4>{this.state.isSignUp ? "SIGN UP" : "SIGN IN"}</h4>
+        {isAuthRedirect}
         {error}
         {form}
+        
       </div>
     );
   }
@@ -145,13 +161,18 @@ class Auth extends Component {
 const matchStateToProps = state => {
   return {
     loading: state.auth.loading,
-    error: state.auth.error
+    error: state.auth.error,
+    isAuthenticated : state.auth.token !== null,
+    burguerIsBuilding : state.burguerBuilder.burguerIsBuilding,
+    redirectURL : state.auth.redirectURL
   };
 };
 
 const matchDispatchToProps = dispatch => {
   return {
-    onSubmitAuth: userData => dispatch(actions.authSubmit(userData))
+    onSubmitAuth: userData => dispatch(actions.authSubmit(userData)),
+    onRedirectAuthURL : (path) => dispatch(actions.redirectPath(path))
+
   };
 };
 

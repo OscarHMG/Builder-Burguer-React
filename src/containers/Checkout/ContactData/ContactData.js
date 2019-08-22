@@ -123,7 +123,8 @@ export class ContactData extends Component {
     const order = {
       ingredients: this.props.ings,
       price: this.props.price,
-      orderData: data
+      orderData: data,
+      userId: this.props.userId
     };
 
     //async
@@ -211,7 +212,8 @@ const matchStateToProps = state => {
   return {
     ings: state.burguerBuilder.ingredients,
     price: state.burguerBuilder.totalPrice,
-    loading: state.order.loading
+    loading: state.order.loading,
+    userId: state.auth.userId
   };
 };
 

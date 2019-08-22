@@ -20,3 +20,11 @@ export const FETCH_ORDERS_FAIL = 'FETCH_ORDERS_FAIL';
 export const AUTH_START = 'AUTH_START';
 export const AUTH_SUCCES = 'AUTH_SUCCES';
 export const AUTH_FAIL = 'AUTH_FAIL';
+
+//LOG OUT 
+
+export const LOG_OUT = 'LOG_OUT';
+
+//REDIRECT
+
+export const REDIRECT_PATH = 'REDIRECT_PATH';
