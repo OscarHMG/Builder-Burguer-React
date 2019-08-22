@@ -149,7 +149,6 @@ export class ContactData extends Component {
       updatedFormElement.validation
     );
     updatedFormElement.touched = true;
-    //console.log(updatedFormElement);
 
     let formIsValid = true;
     for (let inputIdentifier in updatedForm) {
